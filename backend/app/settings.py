@@ -27,6 +27,14 @@ SECRET_KEY = "django-insecure-k*l4rtau*rd*)83hsjg1mg0zo8jdttc46w!fsz1tcgstm$)eq&
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = [
+    # '*',
+    # '0.0.0.0:8000',
+    # 'localhost:8000'
+]
+
+
+CSRF_TRUSTED_ORIGINS += os.environ.get('CSRF_TRUSTED_ORIGINS').split(',')
 
 
 # Application definition
@@ -71,6 +79,7 @@ TEMPLATES = [
     },
 ]
 
+ASGI_APPLICATION = "app.asgi.application"
 WSGI_APPLICATION = "app.wsgi.application"
 
 
@@ -83,6 +92,18 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'HOST': os.environ.get('DB_HOST'),
+#         'NAME': os.environ.get('DB_NAME'),
+#         'USER': os.environ.get('DB_USER'),
+#         'PASSWORD': os.environ.get('DB_PASS'),
+#         'PORT': os.environ.get('DB_PORT'),
+#     }
+# }
 
 
 # Password validation
@@ -120,7 +141,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles'), os.path.join(BASE_DIR, 'static/admin', os.path.join(BASE_DIR, '/'))]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/admin', os.path.join(BASE_DIR, '/'))]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STORAGES = {
     "staticfiles": {
