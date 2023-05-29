@@ -30,11 +30,17 @@ ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
     # '*',
     # '0.0.0.0:8000',
-    # 'localhost:8000'
+    # 'https://localhost:8000',
+    # 'https://8000-koitoror-provablyfairrn-o76evb0nbaf.ws-eu98.gitpod.io',
 ]
 
 
+def removeSquareBrackets(x):
+    if x.startswith('['): x = x[1:]
+    if x.endswith(']'): x = x[:-1]
+    return x
 CSRF_TRUSTED_ORIGINS += os.environ.get('CSRF_TRUSTED_ORIGINS').split(',')
+CSRF_TRUSTED_ORIGINS = list(map(removeSquareBrackets, CSRF_TRUSTED_ORIGINS))
 
 
 # Application definition
