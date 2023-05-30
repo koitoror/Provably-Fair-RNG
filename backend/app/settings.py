@@ -40,6 +40,7 @@ def removeSquareBrackets(x):
     if x.endswith(']'): x = x[:-1]
     return x
 CSRF_TRUSTED_ORIGINS += list(map(removeSquareBrackets, os.environ.get('CSRF_TRUSTED_ORIGINS').split(',') ))
+print('CSRF_TRUSTED_ORIGINS → ', CSRF_TRUSTED_ORIGINS)
 
 # Application definition
 
